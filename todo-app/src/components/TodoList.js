@@ -1,33 +1,28 @@
-import React, { Component,  useState, useReducer } from "react";
-import ReactDOM from "react-dom";
-import Todo from './Todo';
-import { TodoReducer, initialState } from "../reducers/TodoReducer";
-
+import React, { useReducer } from 'react';
+import { initialState, TodoReducer } from '../reducers/TodoReducer';
 
 const TodoList = () => {
-    // constructor() { 
-    //     super();
-    //     this.state = {this.state.listProps}
-
-    // }
-    const [listItems, setListItems] = useState();
-    const [state, dispatch] = useReducer(TodoReducer, initialState);
-
-    const list = state.todos;
-
-
+    const [state, dispatch] = useReducer(TodoReducer, initialState)
+    console.log(state);
+    
+    
     return (
-        <div className="list-container">
-            <ol className="ordered-list">
-                {list.map(item => (
-                    <Todo taskName = {item.task} />
-                    // toggleItem={props.toggleItem} id={item.id} itemProp={item.task} isComplete={item.completed}
-                ))}
-            </ol>
+        
+            <div>
+                <h1>Todo</h1>
+                {state.map(state => {
+                    return (
+                        <div>
+                            <li className = {`${state.completed ? ' completed' : ''}`} onClick={() => dispatch({ type: 'CROSS_ITEM', payload: state.id })}>{state.item}</li>
+                        </div>
+                    )
+                })}
+                <div className="formContainer">
+                    <input className="itemField" />
+                    <button onClick={() => dispatch({ type: 'ADD_TODO', payload: `${ document.querySelector('input').value }`})}>Add Item to List </button>
+                    <button onClick = {() => dispatch({ type: 'CLEAR_COMPLETED'})}>Clear Completed</button>
+            </div>
         </div>
-    );
-
+    )
 }
-
-
 export default TodoList;

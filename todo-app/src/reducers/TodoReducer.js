@@ -1,53 +1,54 @@
-export const initialState = {
-    todos: [
-        {
-            task: 'Learn about reducers',
-            id: 3892987589,
-            completed: false
-        },
-        {
-            task: 'Organize Garage',
-            id: 1528817077286,
-            completed: false
-        },
-        {
-            task: 'Bake Cookies',
-            id: 1528817084358,
-            completed: false
-        }
-    ]
-
-}
-
+export const initialState = [{
+    item: 'Learn react',
+    completed: false,
+    id: 6547658
+},
+{
+    item: 'Clean room',
+    completed: false,
+    id: 985293
+},
+{
+    item: 'Do homework',
+    completed: false,
+    id: 2345363
+}]
 export const TodoReducer = (state, action) => {
+    //actions: ADD_TODO, TOGGLE_TODO
     switch (action.type) {
-        case 'ADD_ITEM':
-            console.log('State:',state.todos);
-            console.log('Initial State:',initialState.todos);
-            
-            return {
-                ...state,
-                todos: state.todos.concat(
-                    {
-                        task: action.payload,
-                        id: Date.now(),
-                        completed: false
-                    }
-                )
-            };
-        case 'CROSS_ITEM':
-            return {
-                ...state,
-                completed: !state.completed
-            };
-        case 'CLEAR_COMPLETED':
-            console.log('Clearing Completed', state)
-            return {
-                ...state,
-                todos: state.todos.filter(item => !item.completed)
+        case 'ADD_TODO':
+            return [...state,
+            {
+                item: action.payload,
+                completed: false,
+                id: Date.now()
             }
-
-        default: return state;
-
+            ];
+        case 'CROSS_ITEM':
+            let toggled = state.map(item => {
+                if (item.id === action.payload) {
+                    return {
+                        ...item,
+                        completed: !item.completed
+                    };
+                } else {
+                    return item;
+                }
+            });
+            return toggled;
+        case 'CLEAR_COMPLETED':
+            return [
+                ...state,
+                state.filter(item => !item.completed)
+            ]
+        default:
+            return state;
     }
-}
+};
+
+
+//  clearPurchased = () => {
+//     this.setState({
+//       data: this.state.data.filter(item => !item.completed)
+//     });
+//   };
