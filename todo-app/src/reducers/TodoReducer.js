@@ -1,7 +1,7 @@
 export const initialState = {
     todos: [
         {
-            item: 'Learn about reducers',
+            task: 'Learn about reducers',
             completed: false,
             id: 3892987589
         },
@@ -20,5 +20,24 @@ export const initialState = {
 }
 
 export const TodoReducer = (state, action) => {
-    return state;
+    switch (action.type) {
+        case 'ADD_ITEM':
+            return {
+                ...state,
+                title: action.payload
+            };
+        case 'CROSS_ITEM':
+            return {
+                ...state,
+                completed: !state.completed
+            };
+        case 'CLEAR_COMPLETED':
+            return {
+                ...state,
+                 todos: state.todos.filter(item => !item.completed) 
+            }
+
+        default: return state;
+
+    }
 }
