@@ -22,9 +22,10 @@ export const initialState = {
 export const TodoReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_ITEM':
+            console.log('Adding item:',action.payload)
             return {
                 ...state,
-                title: action.payload
+                todos: ([...todos, action.payload])
             };
         case 'CROSS_ITEM':
             return {
