@@ -23,9 +23,15 @@ export const TodoReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_ITEM':
             console.log('Adding item:',action.payload)
+            console.log('State:', state)
+            console.log('Action:', action)
             return {
                 ...state,
-                todos: ([...todos, action.payload])
+                todos: state.todos.concat({task: action.payload,
+                id: Math.random(1),
+                completed: false
+                
+                })
             };
         case 'CROSS_ITEM':
             return {
@@ -33,6 +39,7 @@ export const TodoReducer = (state, action) => {
                 completed: !state.completed
             };
         case 'CLEAR_COMPLETED':
+            console.log('Clearing Completed', state)
             return {
                 ...state,
                  todos: state.todos.filter(item => !item.completed) 
