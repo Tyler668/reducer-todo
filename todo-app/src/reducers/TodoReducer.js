@@ -28,7 +28,7 @@ export const TodoReducer = (state, action) => {
             return {
                 ...state,
                 todos: state.todos.concat({task: action.payload,
-                id: Math.random(1),
+                id: Date.now(),
                 completed: false
                 
                 })
