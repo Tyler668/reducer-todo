@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
     todos: [
         {
             item: 'Learn about reducers',
@@ -17,4 +17,8 @@ const initialState = {
         }
     ]
 
+}
+
+export const TodoReducer = (state, action) => {
+    return state;
 }
