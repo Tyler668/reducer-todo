@@ -37,10 +37,8 @@ export const TodoReducer = (state, action) => {
             });
             return toggled;
         case 'CLEAR_COMPLETED':
-            return [
-                ...state,
-                state.filter(item => !item.completed)
-            ]
+            return state.filter(element => element.completed === false);
+            
         default:
             return state;
     }
