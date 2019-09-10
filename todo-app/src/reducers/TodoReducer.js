@@ -2,8 +2,8 @@ export const initialState = {
     todos: [
         {
             task: 'Learn about reducers',
-            completed: false,
-            id: 3892987589
+            id: 3892987589,
+            completed: false
         },
         {
             task: 'Organize Garage',
@@ -22,16 +22,18 @@ export const initialState = {
 export const TodoReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_ITEM':
-            console.log('Adding item:',action.payload)
-            console.log('State:', state)
-            console.log('Action:', action)
+            console.log('State:',state.todos);
+            console.log('Initial State:',initialState.todos);
+            
             return {
                 ...state,
-                todos: state.todos.concat({task: action.payload,
-                id: Date.now(),
-                completed: false
-                
-                })
+                todos: state.todos.concat(
+                    {
+                        task: action.payload,
+                        id: Date.now(),
+                        completed: false
+                    }
+                )
             };
         case 'CROSS_ITEM':
             return {
@@ -42,7 +44,7 @@ export const TodoReducer = (state, action) => {
             console.log('Clearing Completed', state)
             return {
                 ...state,
-                 todos: state.todos.filter(item => !item.completed) 
+                todos: state.todos.filter(item => !item.completed)
             }
 
         default: return state;

@@ -10,7 +10,7 @@ const Todo = (props) => {
   const [state, dispatch] = useReducer(TodoReducer, initialState);
 
     return (
-    <li className =  {`todo${state.completed ? ' completed' : ''}`} onClick = {() => dispatch({type: 'CROSS_ITEM'})}>{props.taskName}</li>
+    <li className =  {`todo${state.completed ? ' completed' : ''}`} onClick = {() => dispatch({type: 'CROSS_ITEM', payload: (props.taskName) })}>{props.taskName}</li>
     );
 }
 export default Todo;
